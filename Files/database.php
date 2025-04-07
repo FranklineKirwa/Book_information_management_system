@@ -6,7 +6,7 @@ class Database {
         $this->db = new SQLite3('books.db');
         $this->createTables();
     }
-    
+
     private function createTables() {
         // Users table
         $this->db->exec("CREATE TABLE IF NOT EXISTS users (
@@ -31,3 +31,6 @@ class Database {
         return $this->db;
     }
 }
+
+$db=new database();
+echo "Database and tables have been created.";
