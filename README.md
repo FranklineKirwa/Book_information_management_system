@@ -3,7 +3,7 @@
 
 ## 🎯 Objective
 
-This is a lightweight web application built using **Vanilla PHP**, **SQLite**, and **Tailwind CSS**. The application allows users to register, log in, and manage their personal collection of books in a simple, responsive, and elegant interface.
+This is a web application built using **Vanilla PHP**, **SQLite**, and **Tailwind CSS**. The application allows users to register, log in, and manage their personal collection of books in a simple, responsive, and elegant interface.
 
 ---
 
