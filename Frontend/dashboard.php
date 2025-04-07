@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once 'auth.php';
-require_once 'books.php';
+require_once '../Files/auth.php';
+require_once '../Files/books.php';
 
 $auth = new Auth();
 if (!$auth->isLoggedIn()) {
@@ -28,7 +28,7 @@ if (isset($_POST['add_book'])) {
     <div class="container mx-auto p-4">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold">My Book Collection</h1>
-            <a href="process.php?logout=1" class="bg-red-500 text-white px-4 py-2 rounded">Logout</a>
+            <a href="../Processing/process.php?logout=1" class="bg-red-500 text-white px-4 py-2 rounded">Logout</a>
         </div>
 
         <!-- Add Book Form -->
@@ -60,7 +60,7 @@ if (isset($_POST['add_book'])) {
                     <div class="mt-4 flex gap-2">
                         <button onclick="showEditForm(<?php echo $book['id']; ?>, '<?php echo htmlspecialchars($book['title']); ?>', '<?php echo htmlspecialchars($book['author']); ?>', '<?php echo $book['year_of_publish']; ?>', '<?php echo htmlspecialchars($book['recommendations']); ?>')"
                             class="bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
-                        <form method="POST" action="process.php">
+                        <form method="POST" action="../Processing/process.php">
                             <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
                             <button type="submit" name="delete_book"
                                 class="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
@@ -75,7 +75,7 @@ if (isset($_POST['add_book'])) {
     <div id="editModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
         <div class="bg-white p-6 rounded-lg w-96">
             <h2 class="text-xl font-bold mb-4">Edit Book</h2>
-            <form method="POST" action="process.php">
+            <form method="POST" action="../Processing/process.php">
                 <input type="hidden" name="book_id" id="edit_book_id">
                 <div class="mb-4">
                     <input type="text" name="title" id="edit_title" required

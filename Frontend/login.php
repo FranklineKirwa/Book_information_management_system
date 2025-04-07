@@ -10,7 +10,7 @@
         <?php if (isset($_GET['error'])): ?>
             <p class="text-red-500 text-center mb-4">Invalid credentials</p>
         <?php endif; ?>
-        <form method="POST" action="process.php">
+        <form method="POST" action="../Processing/process.php">
             <div class="mb-4">
                 <input type="text" name="username" placeholder="Username" required
                     class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
