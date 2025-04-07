@@ -1,53 +1,30 @@
-<?php
-require_once 'database.php';
-
-class BookManager {
-    private $db;
-
-    public function __construct() {
-        $database = new Database();
-        $this->db = $database->getConnection();
-    }
-
-    public function addBook($user_id, $title, $author, $year, $recommendations) {
-        $stmt = $this->db->prepare("INSERT INTO books (user_id, title, author, year_of_publish, recommendations)
-            VALUES (:user_id, :title, :author, :year, :recommendations)");
-        $stmt->bindValue(':user_id', $user_id);
-        $stmt->bindValue(':title', $title);
-        $stmt->bindValue(':author', $author);
-        $stmt->bindValue(':year', $year);
-        $stmt->bindValue(':recommendations', $recommendations);
-        return $stmt->execute();
-    }
-
-    public function getUserBooks($user_id) {
-        $stmt = $this->db->prepare("SELECT * FROM books WHERE user_id = :user_id");
-        $stmt->bindValue(':user_id', $user_id);
-        $result = $stmt->execute();
-        $books = [];
-        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-            $books[] = $row;
-        }
-        return $books;
-    }
-
-    public function updateBook($book_id, $user_id, $title, $author, $year, $recommendations) {
-        $stmt = $this->db->prepare("UPDATE books SET title = :title, author = :author,
-            year_of_publish = :year, recommendations = :recommendations
-            WHERE id = :id AND user_id = :user_id");
-        $stmt->bindValue(':title', $title);
-        $stmt->bindValue(':author', $author);
-        $stmt->bindValue(':year', $year);
-        $stmt->bindValue(':recommendations', $recommendations);
-        $stmt->bindValue(':id', $book_id);
-        $stmt->bindValue(':user_id', $user_id);
-        return $stmt->execute();
-    }
-
-    public function deleteBook($book_id, $user_id) {
-        $stmt = $this->db->prepare("DELETE FROM books WHERE id = :id AND user_id = :user_id");
-        $stmt->bindValue(':id', $book_id);
-        $stmt->bindValue(':user_id', $user_id);
-        return $stmt->execute();
-    }
-}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-96">
+        <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+        <?php if (isset($_GET['error'])): ?>
+            <p class="text-red-500 text-center mb-4">Invalid credentials</p>
+        <?php endif; ?>
+        <form method="POST" action="process.php">
+            <div class="mb-4">
+                <input type="text" name="username" placeholder="Username" required
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-6">
+                <input type="password" name="password" placeholder="Password" required
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <button type="submit" name="login"
+                class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+                Login
+            </button>
+        </form>
+        <p class="mt-4 text-center">Don't have an account? <a href="register.php" class="text-blue-500">Register</a></p>
+    </div>
+</body>
+</html>
